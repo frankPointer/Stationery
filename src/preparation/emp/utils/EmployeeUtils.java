@@ -5,6 +5,10 @@ import preparation.emp.JDBCUtils;
 
 import java.sql.*;
 
+/**
+ * 这个类就是一些使用JDBC来查询数据库内容，对一个表来进行增删改查的
+ * 把这个搞懂了就快差不多了
+ */
 public class EmployeeUtils {
     static Connection connection = JDBCUtils.getConnection();
 

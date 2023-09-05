@@ -6,6 +6,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * @author Mr_chen
+ * 这个类是一个JDBC连接的工具类，使用的时候使用这个类名加上方法getConnection就可以直接得到connection了
+ * 另外一个close方法是当你窗口关闭的时候调用用来关闭连接释放资源
+ */
 public class JDBCUtils {
     private static Connection connection;
 

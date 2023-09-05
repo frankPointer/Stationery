@@ -1,4 +1,4 @@
-package preparation.table;
+package preparation.gui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -7,6 +7,9 @@ import java.awt.*;
 import java.sql.*;
 import java.util.Vector;
 
+/**
+ * 这个类是用来将查询后的数据用表格显示出来的，到时候图形化界面展示信息的时候主要靠得就是这个了
+ */
 public class DBTableDemo extends JFrame {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/stationery_system";
     private static final String DB_USER = "root";

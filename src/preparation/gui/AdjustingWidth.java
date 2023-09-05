@@ -1,4 +1,4 @@
-package preparation.table;
+package preparation.gui;
 
 import javax.swing.*;
 import javax.swing.table.*;
