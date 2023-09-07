@@ -17,6 +17,6 @@ emp 包就是我用来测试使用 JDBC 对数据库中的一个表来进行增�
 
 # 正式项目
 **Application** 是一个启动类
-**ui** 里面的**ApplicationMainInterface** 是登录界面的Frame基本界面如下
+**pointer.frame** 里面的**ApplicationMainInterface** 是登录界面的Frame基本界面如下
 ![](https://picgo-1314080015.cos.ap-nanjing.myqcloud.com/PIctures/202309052025103.png)
 **包 constants** 是用来存储一些常量的类

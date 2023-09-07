@@ -1,4 +1,4 @@
-package pointer.ui.componments;
+package pointer.componments;
 
 import javax.swing.*;
 import java.awt.*;
