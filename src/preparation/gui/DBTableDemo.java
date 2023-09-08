@@ -1,5 +1,9 @@
 package preparation.gui;
 
+import pointer.componments.MyTable;
+import pointer.componments.MyTableModel;
+import pointer.util.EmployeeUtil;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -18,15 +22,14 @@ public class DBTableDemo extends JFrame {
 
     // 定义表格组件和滚动面板组件
     private JTable table;
-    private JScrollPane scrollPane;
-
     public DBTableDemo() {
         // 调用父类构造方法，设置窗口标题
         super("DBTableDemo");
 
         // 创建表格模型对象，并调用方法从数据库中获取数据
-        DefaultTableModel tableModel = new DefaultTableModel();
-        getDataFromDB(tableModel);
+        MyTableModel tableModel = new MyTableModel();
+
+        EmployeeUtil.getTableData(tableModel);
 
         // 创建表格对象，并将表格模型对象作为参数传递给它
         table = new JTable(tableModel);
@@ -49,8 +52,11 @@ public class DBTableDemo extends JFrame {
         table.setBackground(new Color(224, 242, 255)); // 设置背景色为浅蓝色
         table.setFont(new Font("新宋体", Font.PLAIN, 18)); // 设置字体
 
+
         // 创建滚动面板对象，并将表格对象添加到它里面
-        scrollPane = new JScrollPane(table);
+//        JScrollPane scrollPane = new JScrollPane(table);
+        MyTable myTable = new MyTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(myTable);
 
         // 将滚动面板对象添加到窗口中，并设置窗口的大小、位置、可见性等属性
         this.add(scrollPane);
@@ -58,6 +64,11 @@ public class DBTableDemo extends JFrame {
         this.setLocationRelativeTo(null); // 设置窗口居中显示
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 设置窗口关闭时退出程序
         this.setVisible(true); // 设置窗口可见
+    }
+    public void refreshTableData(JTable table) {
+        DefaultTableModel model =(DefaultTableModel) table.getModel();
+        getDataFromDB(model);
+        model.fireTableDataChanged();
     }
 
     public void getDataFromDB(DefaultTableModel tableModel) {

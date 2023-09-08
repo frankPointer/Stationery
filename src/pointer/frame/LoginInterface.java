@@ -13,9 +13,10 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class MainInterface extends JFrame {
-    public MainInterface() throws IOException {
+public class LoginInterface extends JFrame {
+    public LoginInterface() throws IOException {
         super(FrameConstants.APP_NAME);
+        setIconImage(new ImageIcon("images/icon.png").getImage());
         setSize(FrameConstants.LOGIN_SIZE[0], FrameConstants.LOGIN_SIZE[1]);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

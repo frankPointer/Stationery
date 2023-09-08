@@ -13,7 +13,8 @@ import java.io.IOException;
 public class RegisterInterface extends JFrame {
     public RegisterInterface() throws IOException {
         super(FrameConstants.REGISTER_NAME);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setIconImage(new ImageIcon("images/icon.png").getImage());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds((ScreenUtil.getScreenWidth() - FrameConstants.REGISTER_SIZE[0]) / 2, (ScreenUtil.getScreenHeight() - FrameConstants.REGISTER_SIZE[1]) / 2, FrameConstants.REGISTER_SIZE[0], FrameConstants.REGISTER_SIZE[1]);
         setResizable(false);
         addComponents();
@@ -93,7 +94,7 @@ public class RegisterInterface extends JFrame {
         backBtn.addActionListener(e -> {
             this.dispose();
             try {
-                new MainInterface().setVisible(true);
+                new LoginInterface().setVisible(true);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
