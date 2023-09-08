@@ -23,7 +23,7 @@ public class EmployeeInterface extends JPanel {
         // 创建表格对象，并将表格模型对象作为参数传递给它
         MyTable table = new MyTable(tableModel);
 
-        scrollPane.add(table);
+        scrollPane.setViewportView(table);
         return scrollPane;
     }
 
@@ -50,6 +50,7 @@ public class EmployeeInterface extends JPanel {
 
         searchButton.addActionListener(e -> {
             String searchWay = (String) searchMethodBox.getSelectedItem();
+            String searchTarget = searchField.getText().trim();
 
         });
         return buttonPanel;
