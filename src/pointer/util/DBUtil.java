@@ -27,6 +27,16 @@ public class DBUtil {
         return connection;
     }
 
+    // 关闭资源
+    public static void closeConnection(Connection connection, Statement statement) throws SQLException {
+        if(connection!=null){
+            connection.close();
+        }
+        if(statement!=null){
+            statement.close();
+        }
+    }
+
     public static void closeConnection(Connection con, PreparedStatement ps, ResultSet rs) {
         //ResultSet关闭
         if (rs != null) {

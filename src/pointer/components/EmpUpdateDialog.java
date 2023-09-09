@@ -1,6 +1,7 @@
 package pointer.components;
 
 import pointer.constants.FrameConstants;
+import pointer.util.EmpUtil;
 import pointer.util.ScreenUtil;
 
 import javax.imageio.ImageIO;
@@ -125,6 +126,9 @@ public class EmpUpdateDialog extends JDialog {
             String password = pField.getText().trim();
             String gender = gGroup.isSelected(maleBtn.getModel()) ? "男" : "女";
             String phone = tField.getText().trim();
+
+            // TODO 更新表格
+            EmpUtil.updateTable(this.id,name,password,gender,phone);
         });
     }
 

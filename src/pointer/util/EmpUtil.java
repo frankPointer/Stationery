@@ -9,6 +9,7 @@ import java.util.Vector;
 
 public class EmpUtil {
     private static final String TABLE_NAME = "employee";
+
     public static Map<Integer, String> getNamePassword() {
         // 使用hashmap 来存储名字和密码
         Map<Integer, String> map = new HashMap<>();
@@ -76,13 +77,32 @@ public class EmpUtil {
                 tableModel.addRow(rowData); // 将该行数据的向量添加到表格模型对象中
             }
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static void updateTable(Integer id, String name, String password, String gender, String phone)
-    {
+    public static void updateTable(Integer id, String name, String password, String gender, String phone) {
+        String query = "update  employee set " +
+                "name  = ?," +
+                "password = ?," +
+                "gender = ?," +
+                "phone = ?"+
+                "where id  = ?";
 
+        try {
+            Connection connection = DBUtil.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, password);
+            ps.setString(3, gender);
+            ps.setString(4, phone);
+            ps.setInt(5, id);
+
+            ps.executeUpdate();
+
+        }catch (SQLException e ) {
+            e.printStackTrace();
+        }
     }
 }

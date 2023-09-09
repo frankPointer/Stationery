@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class EmpInterface extends JPanel {
     private static MyTable table;
+    private static MyTableModel tableModel;
 
     public EmpInterface() {
         setLayout(new BorderLayout());
@@ -20,7 +21,7 @@ public class EmpInterface extends JPanel {
     private static JScrollPane getTableScrollPane() {
         JScrollPane scrollPane = new JScrollPane();
         // 创建表格模型对象，并调用方法从数据库中获取数据
-        MyTableModel tableModel = new MyTableModel();
+        tableModel = new MyTableModel();
         EmpUtil.getTableData(tableModel);
 
         // 创建表格对象，并将表格模型对象作为参数传递给它
@@ -90,17 +91,23 @@ public class EmpInterface extends JPanel {
         });
         updateButton.addActionListener(e -> {
             int row = table.getSelectedRow();
+            if (row == -1) {
+                JOptionPane.showMessageDialog(null, "当前未选中任何数据", "提示", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                // 提交更新到数据库
+                Integer id = (Integer) table.getValueAt(row, 0);
+                String name = (String) table.getValueAt(row, 1);
+                String gender = (String) table.getValueAt(row, 2);
+                String password = (String) table.getValueAt(row, 3);
+                String phone = (String) table.getValueAt(row, 4);
+                try {
+                    new EmpUpdateDialog("更新员工信息", true, id, name, gender, password, phone).setVisible(true);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
 
-            // TODO 所选行的数据，修改Dialog的构造方法
-            Integer id = (Integer) table.getValueAt(row, 0);
-            String name = (String) table.getValueAt(row, 1);
-            String gender = (String) table.getValueAt(row, 2);
-            String password = (String) table.getValueAt(row, 3);
-            String phone = (String) table.getValueAt(row, 4);
-            try {
-                new EmpUpdateDialog("更新员工信息", true, id, name, gender, password, phone).setVisible(true);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                // 更新表格
+
             }
         });
         return buttonPanel;
