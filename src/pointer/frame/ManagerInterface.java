@@ -1,6 +1,6 @@
 package pointer.frame;
 
-import pointer.componments.EmployeeInterface;
+import pointer.components.EmpInterface;
 import pointer.constants.FrameConstants;
 import pointer.util.ScreenUtil;
 
@@ -95,7 +95,7 @@ public class ManagerInterface extends JFrame {
         tree.addTreeSelectionListener(e -> {
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
             if (node.equals(productManage)) {
-                splitPane.setRightComponent(new EmployeeInterface());
+                splitPane.setRightComponent(new EmpInterface());
                 splitPane.setDividerLocation(200);
             }
         });

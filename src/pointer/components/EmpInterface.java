@@ -1,14 +1,15 @@
-package pointer.componments;
+package pointer.components;
 
-import pointer.util.EmployeeUtil;
+import pointer.util.EmpUtil;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
-public class EmployeeInterface extends JPanel {
+public class EmpInterface extends JPanel {
     private static MyTable table;
 
-    public EmployeeInterface() {
+    public EmpInterface() {
         setLayout(new BorderLayout());
 
         this.add(getButtonPanel(), BorderLayout.NORTH);
@@ -20,7 +21,7 @@ public class EmployeeInterface extends JPanel {
         JScrollPane scrollPane = new JScrollPane();
         // 创建表格模型对象，并调用方法从数据库中获取数据
         MyTableModel tableModel = new MyTableModel();
-        EmployeeUtil.getTableData(tableModel);
+        EmpUtil.getTableData(tableModel);
 
         // 创建表格对象，并将表格模型对象作为参数传递给它
         table = new MyTable(tableModel);
@@ -87,6 +88,21 @@ public class EmployeeInterface extends JPanel {
                 }
             }
         });
+        updateButton.addActionListener(e -> {
+            int row = table.getSelectedRow();
+
+            // TODO 所选行的数据，修改Dialog的构造方法
+            Integer id = (Integer) table.getValueAt(row, 0);
+            String name = (String) table.getValueAt(row, 1);
+            String gender = (String) table.getValueAt(row, 2);
+            String password = (String) table.getValueAt(row, 3);
+            String phone = (String) table.getValueAt(row, 4);
+            try {
+                new EmpUpdateDialog("更新员工信息", true, id, name, gender, password, phone).setVisible(true);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         return buttonPanel;
     }
 
@@ -95,11 +111,6 @@ public class EmployeeInterface extends JPanel {
         for (int i = 0; i < table.getModel().getRowCount(); i++) {
             if (searchTarget.equals(table.getModel().getValueAt(i, 1))) {
                 flag = i;
-
-                // TODO 测试
-                System.out.println("i = " + i);
-                System.out.println(table.getModel().getValueAt(i, 1));
-
                 return flag;
             }
         }
@@ -111,11 +122,6 @@ public class EmployeeInterface extends JPanel {
         for (int i = 0; i < table.getModel().getRowCount(); i++) {
             if (searchTarget.equals(table.getModel().getValueAt(i, 0))) {
                 flag = i;
-
-                // TODO 测试
-                System.out.println("i = " + i);
-                System.out.println(table.getModel().getValueAt(i, 0));
-
                 return flag;
             }
         }

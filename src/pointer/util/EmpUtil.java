@@ -1,13 +1,13 @@
 package pointer.util;
 
-import pointer.componments.MyTableModel;
+import pointer.components.MyTableModel;
 
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-public class EmployeeUtil {
+public class EmpUtil {
     private static final String TABLE_NAME = "employee";
     public static Map<Integer, String> getNamePassword() {
         // 使用hashmap 来存储名字和密码
@@ -79,5 +79,10 @@ public class EmployeeUtil {
         } catch(SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void updateTable(Integer id, String name, String password, String gender, String phone)
+    {
+
     }
 }

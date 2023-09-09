@@ -1,4 +1,4 @@
-package pointer.componments;
+package pointer.components;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;

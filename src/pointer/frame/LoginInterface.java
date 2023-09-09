@@ -1,6 +1,6 @@
 package pointer.frame;
 
-import pointer.componments.BackGroundPanel;
+import pointer.components.BackGroundPanel;
 import pointer.constants.FrameConstants;
 import pointer.util.DBUtil;
 import pointer.util.LoginUtil;

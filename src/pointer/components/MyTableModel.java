@@ -1,4 +1,4 @@
-package pointer.componments;
+package pointer.components;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.Vector;

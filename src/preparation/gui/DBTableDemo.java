@@ -1,8 +1,8 @@
 package preparation.gui;
 
-import pointer.componments.MyTable;
-import pointer.componments.MyTableModel;
-import pointer.util.EmployeeUtil;
+import pointer.components.MyTable;
+import pointer.components.MyTableModel;
+import pointer.util.EmpUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -29,7 +29,7 @@ public class DBTableDemo extends JFrame {
         // 创建表格模型对象，并调用方法从数据库中获取数据
         MyTableModel tableModel = new MyTableModel();
 
-        EmployeeUtil.getTableData(tableModel);
+        EmpUtil.getTableData(tableModel);
 
         // 创建表格对象，并将表格模型对象作为参数传递给它
         table = new JTable(tableModel);
