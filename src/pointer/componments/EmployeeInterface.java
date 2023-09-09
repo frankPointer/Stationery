@@ -6,11 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class EmployeeInterface extends JPanel {
+    private static MyTable table;
+
     public EmployeeInterface() {
         setLayout(new BorderLayout());
 
         this.add(getButtonPanel(), BorderLayout.NORTH);
-        this.add(getTableScrollPane(),BorderLayout.CENTER);
+        this.add(getTableScrollPane(), BorderLayout.CENTER);
 
     }
 
@@ -21,7 +23,7 @@ public class EmployeeInterface extends JPanel {
         EmployeeUtil.getTableData(tableModel);
 
         // 创建表格对象，并将表格模型对象作为参数传递给它
-        MyTable table = new MyTable(tableModel);
+        table = new MyTable(tableModel);
 
         scrollPane.setViewportView(table);
         return scrollPane;
@@ -51,9 +53,73 @@ public class EmployeeInterface extends JPanel {
         searchButton.addActionListener(e -> {
             String searchWay = (String) searchMethodBox.getSelectedItem();
             String searchTarget = searchField.getText().trim();
+            int row;
+            assert searchWay != null;
+            if (searchWay.equals("请选择查找方式")) {
+                JOptionPane.showMessageDialog(null, "请选择查找方式", "提示", JOptionPane.INFORMATION_MESSAGE);
 
+            } else {
+                if (searchTarget.length() == 0) {
+                    JOptionPane.showMessageDialog(null, "请输入查找内容", "提示", JOptionPane.INFORMATION_MESSAGE);
+
+                } else {
+
+                    if (searchWay.equals("员工ID")) {
+                        row = retrieveEmpID(searchTarget);
+
+                        if (row == 0) {
+                            JOptionPane.showMessageDialog(null, "查无此人", "提示", JOptionPane.WARNING_MESSAGE);
+                        } else {
+
+                            table.setRowSelectionInterval(0, row);  // 选中查找行
+                        }
+
+                    } else if (searchWay.equals("员工名字")) {
+                        row = retrieveEmpName(searchTarget);
+
+                        if (row == 0) {
+                            JOptionPane.showMessageDialog(null, "查无此人", "提示", JOptionPane.WARNING_MESSAGE);
+                        } else {
+                            table.setRowSelectionInterval(1, row);  // 选中查找行
+                        }
+
+                    }
+                }
+            }
         });
         return buttonPanel;
+    }
+
+    private static int retrieveEmpName(String searchTarget) {
+        int flag = 0;
+        for (int i = 0; i < table.getModel().getRowCount(); i++) {
+            if (searchTarget.equals(table.getModel().getValueAt(i, 1))) {
+                flag = i;
+
+                // TODO 测试
+                System.out.println("i = " + i);
+                System.out.println(table.getModel().getValueAt(i, 1));
+
+                return flag;
+            }
+        }
+        return flag;
+    }
+
+    private static int retrieveEmpID(String searchTarget) {
+        int flag = 0;
+        for (int i = 0; i < table.getModel().getRowCount(); i++) {
+            if (searchTarget.equals(table.getModel().getValueAt(i, 0))) {
+                flag = i;
+
+                // TODO 测试
+                System.out.println("i = " + i);
+                System.out.println(table.getModel().getValueAt(i, 0));
+
+                return flag;
+            }
+        }
+        return flag;
     }
 
 
