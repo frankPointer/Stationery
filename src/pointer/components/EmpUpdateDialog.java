@@ -127,9 +127,14 @@ public class EmpUpdateDialog extends JDialog {
             String gender = gGroup.isSelected(maleBtn.getModel()) ? "男" : "女";
             String phone = tField.getText().trim();
 
-            // TODO 更新表格
+            // 更新表格
             EmpUtil.updateTable(this.id,name,password,gender,phone);
+
+            // 关闭弹窗
+            this.dispose();
         });
+
+        cancelBtn.addActionListener(e -> this.dispose());
     }
 
 }

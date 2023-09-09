@@ -8,7 +8,6 @@ import java.io.IOException;
 
 public class EmpInterface extends JPanel {
     private static MyTable table;
-    private static MyTableModel tableModel;
 
     public EmpInterface() {
         setLayout(new BorderLayout());
@@ -21,7 +20,7 @@ public class EmpInterface extends JPanel {
     private static JScrollPane getTableScrollPane() {
         JScrollPane scrollPane = new JScrollPane();
         // 创建表格模型对象，并调用方法从数据库中获取数据
-        tableModel = new MyTableModel();
+        MyTableModel tableModel = new MyTableModel();
         EmpUtil.getTableData(tableModel);
 
         // 创建表格对象，并将表格模型对象作为参数传递给它
@@ -107,10 +106,16 @@ public class EmpInterface extends JPanel {
                 }
 
                 // 更新表格
-
+                updateTable();
             }
         });
         return buttonPanel;
+    }
+
+    private static void updateTable() {
+        MyTableModel tableModel = new MyTableModel();
+        EmpUtil.getTableData(tableModel);
+        table.setModel(tableModel);
     }
 
     private static int retrieveEmpName(String searchTarget) {
