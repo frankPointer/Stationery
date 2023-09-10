@@ -107,7 +107,7 @@ public class EmpUtil {
     }
 
     public static void deleteTable(Integer id) {
-        String query = "delete from" + " TABLE_NAME " + "where id = ?";
+        String query = "delete from " + TABLE_NAME + " where id  = ?";
 
         try {
             Connection connection = DBUtil.getConnection();

@@ -6,10 +6,20 @@ import java.sql.*;
 import java.util.StringJoiner;
 import java.util.Vector;
 
+/**
+ * @author Frank_pointer
+ * <p><code>TableUtil</code> 对数据库表格 crud 类的操作</p>
+ *
+ * <p>{@link #insertTable(Vector)} 对于自增主码的表格传入除了主码之外的其他数据之后就会将数据插入表格中，并返回新生成的主码</p>
+ * <p>{@link #getTableData(MyTableModel)} 从数据库表格得到数据并生成可赋值给 Jtable 的 TableModel</p>
+ * <p>{@link #updateTable(int, Vector)} 给出 id，和除了 id 之外的数据就可更新</p>
+ * <p>{@link #deleteTable(Integer)} 对于给定的 主码id 可以删除对应的数据</p>
+ * @version 1.0
+ */
 public class TableUtil {
-    private final String TABLE_NAME;
-    private Vector<String> columnNames;
-    private int columnCount;
+    private final String TABLE_NAME; // 数据库表格名字
+    private Vector<String> columnNames; // 数据库每一列的列名
+    private int columnCount; // 列的数量
 
     public TableUtil(String TABLE_NAME) {
         this.TABLE_NAME = TABLE_NAME;
@@ -35,6 +45,7 @@ public class TableUtil {
     public int insertTable(Vector<String> myList) {
         int empID = 0;
 
+        // 使用 StringJoiner 来组成sql 语句
         StringJoiner joinerOne = new StringJoiner(",", "(", ")");
         StringJoiner joinerTwo = new StringJoiner(",", "(", ")");
         for (int i = 1; i < columnCount; i++) {
@@ -56,6 +67,7 @@ public class TableUtil {
 
             ps.executeUpdate();
 
+            // 得到自增主键
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 empID = rs.getInt(1);
@@ -69,6 +81,7 @@ public class TableUtil {
     public void getTableData(MyTableModel tableModel) {
         try {
             Connection connection = DBUtil.getConnection();
+            // 这里查询的每一个表的视图，表的列名为英文，视图的列名为中文
             PreparedStatement ps = connection.prepareStatement("select * from " + TABLE_NAME + "_view");
             ResultSet rs = ps.executeQuery();
 
@@ -97,15 +110,43 @@ public class TableUtil {
 
     }
 
-    public static void main(String[] args) {
-        TableUtil tableUtil = new TableUtil("employee");
-        Vector<String> myList = new Vector<>();
-        myList.add("Mary");
-        myList.add("111111");
-        myList.add("男");
-        myList.add("12345678451");
+    public void updateTable(int id, Vector<String> myList) {
+        // 组成 sql 语句
+        StringJoiner joiner = new StringJoiner(" = ?,", " ", " = ?");
+        for (int i = 1; i < columnCount; i++) {
+            joiner.add(columnNames.get(i));
+        }
+        String query = "update " + TABLE_NAME + " set" +
+                joiner +
+                " where " + columnNames.get(0) + "= ?";
 
-        tableUtil.insertTable(myList);
+        try {
+            Connection connection = DBUtil.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            for (int i = 0; i < myList.size(); i++) {
+                ps.setString(i + 1, myList.get(i));
+            }
+            ps.setInt(5, id);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteTable(Integer id) {
+        String query = "delete from " + TABLE_NAME + " where id = ?";
+
+        try {
+            Connection connection = DBUtil.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 
