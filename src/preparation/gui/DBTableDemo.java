@@ -2,7 +2,7 @@ package preparation.gui;
 
 import pointer.components.MyTable;
 import pointer.components.MyTableModel;
-import pointer.util.EmpUtil;
+import pointer.util.TableUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -29,8 +29,11 @@ public class DBTableDemo extends JFrame {
         // 创建表格模型对象，并调用方法从数据库中获取数据
         MyTableModel tableModel = new MyTableModel();
 
-        EmpUtil.getTableData(tableModel);
+//        EmpUtil.getTableData(tableModel);
 
+        // 测试tableUtil 工具类的通用性
+        TableUtil tableUtil = new TableUtil("employee");
+        tableUtil.getTableData(tableModel);
         // 创建表格对象，并将表格模型对象作为参数传递给它
         table = new JTable(tableModel);
 
@@ -41,7 +44,7 @@ public class DBTableDemo extends JFrame {
         headerRenderer.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class, headerRenderer);
 
-        table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 30));	//修改表头的高度
+        table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 30));    //修改表头的高度
         table.getTableHeader().setFont(new Font("微软雅黑", Font.PLAIN, 15)); // 设置表头字体
         table.getTableHeader().setReorderingAllowed(false); // 禁用列拖拽调整
 
