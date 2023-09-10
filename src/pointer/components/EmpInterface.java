@@ -114,7 +114,7 @@ public class EmpInterface extends JPanel {
             if (row == -1) {
                 JOptionPane.showMessageDialog(null, "当前未选中任何数据", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                Integer id = (Integer) table.getValueAt(row,0);
+                Integer id = (Integer) table.getValueAt(row, 0);
                 String name = (String) table.getValueAt(row, 1);
                 int result = JOptionPane.showConfirmDialog(null, "<html>确定删除用户 <b>" + name + "</b> 吗？</html>", "提示", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
@@ -122,6 +122,14 @@ public class EmpInterface extends JPanel {
                     updateTable();
                 }
             }
+        });
+        insertButton.addActionListener(e -> {
+            try {
+                new EmpInsertDialog("添加新员工", true).setVisible(true);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            updateTable();
         });
         return buttonPanel;
     }
@@ -133,25 +141,23 @@ public class EmpInterface extends JPanel {
     }
 
     private static int retrieveEmpName(String searchTarget) {
-        int flag = 0;
         for (int i = 0; i < table.getModel().getRowCount(); i++) {
-            if (searchTarget.equals(table.getModel().getValueAt(i, 1))) {
-                flag = i;
-                return flag;
+            String valueAt = (String) table.getModel().getValueAt(i, 1);
+            if (searchTarget.equals(valueAt)) {
+                return i;
             }
         }
-        return flag;
+        return -1;
     }
 
     private static int retrieveEmpID(String searchTarget) {
-        int flag = 0;
         for (int i = 0; i < table.getModel().getRowCount(); i++) {
-            if (searchTarget.equals(table.getModel().getValueAt(i, 0))) {
-                flag = i;
-                return flag;
+            String valueAt =table.getModel().getValueAt(i, 0).toString();
+            if (searchTarget.equals(valueAt)) {
+                return i;
             }
         }
-        return flag;
+        return -1;
     }
 
 

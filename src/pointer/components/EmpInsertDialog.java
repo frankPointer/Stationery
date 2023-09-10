@@ -1,6 +1,5 @@
-package pointer.frame;
+package pointer.components;
 
-import pointer.components.BackGroundPanel;
 import pointer.constants.FrameConstants;
 import pointer.util.EmpUtil;
 import pointer.util.ScreenUtil;
@@ -10,22 +9,25 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 
-public class RegisterInterface extends JFrame {
-    public RegisterInterface() throws IOException {
-        super(FrameConstants.REGISTER_NAME);
-        setIconImage(new ImageIcon("images/icon.png").getImage());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds((ScreenUtil.getScreenWidth() - FrameConstants.REGISTER_SIZE[0]) / 2, (ScreenUtil.getScreenHeight() - FrameConstants.REGISTER_SIZE[1]) / 2, FrameConstants.REGISTER_SIZE[0], FrameConstants.REGISTER_SIZE[1]);
+public class EmpInsertDialog extends JDialog {
+    public EmpInsertDialog(String title, boolean modal) throws IOException {
+        setTitle(title);
+        setModal(modal);
         setResizable(false);
+
         addComponents();
     }
 
     private void addComponents() throws IOException {
+        // 添加组件
+        setBounds((ScreenUtil.getScreenWidth() - FrameConstants.REGISTER_SIZE[0]) / 2, (ScreenUtil.getScreenHeight() - FrameConstants.REGISTER_SIZE[1]) / 2, FrameConstants.REGISTER_SIZE[0], FrameConstants.REGISTER_SIZE[1]);
+        setIconImage(new ImageIcon("images/icon.png").getImage());
+        setBounds((ScreenUtil.getScreenWidth() - FrameConstants.REGISTER_SIZE[0]) / 2, (ScreenUtil.getScreenHeight() - FrameConstants.REGISTER_SIZE[1]) / 2, FrameConstants.REGISTER_SIZE[0], FrameConstants.REGISTER_SIZE[1]);
         // 背景面板
         BackGroundPanel bgPanel = new BackGroundPanel(ImageIO.read(new File("images/registerBG.jpg")));
-        bgPanel.setBounds(0, 0, FrameConstants.REGISTER_SIZE[0], FrameConstants.REGISTER_SIZE[1]);
 
-        Box registerBox = Box.createVerticalBox(); // 登录界面总的Box
+
+        Box insertBox = Box.createVerticalBox(); // 登录界面总的Box
 
         // 员工名字
         Box uBox = Box.createHorizontalBox();
@@ -68,39 +70,34 @@ public class RegisterInterface extends JFrame {
 
         // 组装按钮
         Box bBox = Box.createHorizontalBox();
-        JButton registerBtn = new JButton("注册");
-        JButton backBtn = new JButton("返回登录");
-        bBox.add(registerBtn);
+        JButton insertBtn = new JButton("添加");
+        JButton cancelBtn = new JButton("取消");
+        bBox.add(insertBtn);
         bBox.add(Box.createHorizontalStrut(120));
-        bBox.add(backBtn);
+        bBox.add(cancelBtn);
 
         // 组装注册界面
-        registerBox.add(Box.createVerticalStrut(40));
-        registerBox.add(uBox);
-        registerBox.add(Box.createVerticalStrut(25));
-        registerBox.add(pBox);
-        registerBox.add(Box.createVerticalStrut(25));
-        registerBox.add(gBox);
-        registerBox.add(Box.createVerticalStrut(25));
-        registerBox.add(tBox);
-        registerBox.add(Box.createVerticalStrut(25));
-        registerBox.add(bBox);
+        insertBox.add(Box.createVerticalStrut(40));
+        insertBox.add(uBox);
+        insertBox.add(Box.createVerticalStrut(25));
+        insertBox.add(pBox);
+        insertBox.add(Box.createVerticalStrut(25));
+        insertBox.add(gBox);
+        insertBox.add(Box.createVerticalStrut(25));
+        insertBox.add(tBox);
+        insertBox.add(Box.createVerticalStrut(25));
+        insertBox.add(bBox);
 
         // 面板添加到界面中
-        bgPanel.add(registerBox);
+        bgPanel.add(insertBox);
         this.add(bgPanel);
 
         // 添加按钮监听器
-        backBtn.addActionListener(e -> {
-            this.dispose();
-            try {
-                new LoginInterface().setVisible(true);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+        cancelBtn.addActionListener(e ->
+                this.dispose()
+        );
 
-        registerBtn.addActionListener(e -> {
+        insertBtn.addActionListener(e -> {
             String name = uField.getText().trim();
             String password = new String(pField.getPassword());
             String gender = gGroup.isSelected(maleBtn.getModel()) ? "男" : "女";
@@ -110,13 +107,8 @@ public class RegisterInterface extends JFrame {
                 JOptionPane.showMessageDialog(null, "名字不能为空，密码不少于6位，手机号码为11位", "警告", JOptionPane.ERROR_MESSAGE);
             } else {
                 int empID = EmpUtil.insertTable(name, password, gender, phone);
-                JOptionPane.showMessageDialog(null, "注册成功\n您的帐号为: " + empID + "\n您的密码为: " + password, "提示", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "添加新员工成功\n员工帐号为: " + empID + "\n员工密码为: " + password, "提示", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
-                try {
-                    new LoginInterface().setVisible(true);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
             }
 
         });

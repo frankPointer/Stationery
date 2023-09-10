@@ -94,7 +94,7 @@ public class ManagerInterface extends JFrame {
         // tree 添加监听
         tree.addTreeSelectionListener(e -> {
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-            if (node.equals(productManage)) {
+            if (node.equals(empManage)) {
                 splitPane.setRightComponent(new EmpInterface());
                 splitPane.setDividerLocation(200);
             }
