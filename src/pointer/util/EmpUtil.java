@@ -28,7 +28,7 @@ public class EmpUtil {
         return map;
     }
 
-    public static int insertEmployee(String name, String password, String gender, String phone) {
+    public static int insertTable(String name, String password, String gender, String phone) {
         int empID = 0;
         String query = "insert into employee (name, password, gender, phone) values (?, ?, ?, ?);\n";
         try {
@@ -87,7 +87,7 @@ public class EmpUtil {
                 "name  = ?," +
                 "password = ?," +
                 "gender = ?," +
-                "phone = ?"+
+                "phone = ?" +
                 "where id  = ?";
 
         try {
@@ -101,7 +101,21 @@ public class EmpUtil {
 
             ps.executeUpdate();
 
-        }catch (SQLException e ) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteTable(Integer id) {
+        String query = "delete from employee where id = ?";
+
+        try {
+            Connection connection = DBUtil.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

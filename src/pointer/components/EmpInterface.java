@@ -68,7 +68,7 @@ public class EmpInterface extends JPanel {
                     if (searchWay.equals("员工ID")) {
                         row = retrieveEmpID(searchTarget);
 
-                        if (row == 0) {
+                        if (row == -1) {
                             JOptionPane.showMessageDialog(null, "查无此人", "提示", JOptionPane.WARNING_MESSAGE);
                         } else {
 
@@ -78,7 +78,7 @@ public class EmpInterface extends JPanel {
                     } else if (searchWay.equals("员工名字")) {
                         row = retrieveEmpName(searchTarget);
 
-                        if (row == 0) {
+                        if (row == -1) {
                             JOptionPane.showMessageDialog(null, "查无此人", "提示", JOptionPane.WARNING_MESSAGE);
                         } else {
                             table.setRowSelectionInterval(1, row);  // 选中查找行
@@ -100,13 +100,27 @@ public class EmpInterface extends JPanel {
                 String password = (String) table.getValueAt(row, 3);
                 String phone = (String) table.getValueAt(row, 4);
                 try {
-                    new EmpUpdateDialog("更新员工信息", true, id, name, gender, password, phone).setVisible(true);
+                    new EmpUpdateDialog("更改员工信息", true, id, name, gender, password, phone).setVisible(true);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
 
                 // 更新表格
                 updateTable();
+            }
+        });
+        deleteButton.addActionListener(e -> {
+            int row = table.getSelectedRow();
+            if (row == -1) {
+                JOptionPane.showMessageDialog(null, "当前未选中任何数据", "提示", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                Integer id = (Integer) table.getValueAt(row,0);
+                String name = (String) table.getValueAt(row, 1);
+                int result = JOptionPane.showConfirmDialog(null, "<html>确定删除用户 <b>" + name + "</b> 吗？</html>", "提示", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    EmpUtil.deleteTable(id);
+                    updateTable();
+                }
             }
         });
         return buttonPanel;

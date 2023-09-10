@@ -109,8 +109,14 @@ public class RegisterInterface extends JFrame {
             if (name.length() == 0 || password.length() < 6 || phone.length() != 11) {
                 JOptionPane.showMessageDialog(null, "名字不能为空，密码不少于6位，手机号码为11位", "警告", JOptionPane.ERROR_MESSAGE);
             } else {
-                int empID = EmpUtil.insertEmployee(name, password, gender, phone);
+                int empID = EmpUtil.insertTable(name, password, gender, phone);
                 JOptionPane.showMessageDialog(null, "注册成功\n您的帐号为: " + empID + "\n密码为: " + password, "提示", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                try {
+                    new LoginInterface().setVisible(true);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
 
         });
