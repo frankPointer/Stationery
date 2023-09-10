@@ -83,7 +83,7 @@ public class EmpUtil {
     }
 
     public static void updateTable(Integer id, String name, String password, String gender, String phone) {
-        String query = "update  employee set " +
+        String query = "update " + TABLE_NAME + " set " +
                 "name  = ?," +
                 "password = ?," +
                 "gender = ?," +
@@ -107,7 +107,7 @@ public class EmpUtil {
     }
 
     public static void deleteTable(Integer id) {
-        String query = "delete from employee where id = ?";
+        String query = "delete from" + " TABLE_NAME " + "where id = ?";
 
         try {
             Connection connection = DBUtil.getConnection();
