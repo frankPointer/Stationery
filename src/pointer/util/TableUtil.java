@@ -16,7 +16,7 @@ import java.util.Vector;
  * <p>{@link #deleteTable(Integer)} 对于给定的 主码id 可以删除对应的数据</p>
  * @version 1.0
  */
-public class TableUtil {
+public abstract class TableUtil {
     private final String TABLE_NAME; // 数据库表格名字
     private Vector<String> columnNames; // 数据库每一列的列名
     private int columnCount; // 列的数量

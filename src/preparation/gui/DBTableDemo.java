@@ -2,7 +2,6 @@ package preparation.gui;
 
 import pointer.components.MyTable;
 import pointer.components.MyTableModel;
-import pointer.util.TableUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -32,8 +31,8 @@ public class DBTableDemo extends JFrame {
 //        EmpUtil.getTableData(tableModel);
 
         // 测试tableUtil 工具类的通用性
-        TableUtil tableUtil = new TableUtil("employee");
-        tableUtil.getTableData(tableModel);
+//        TableUtil tableUtil = new TableUtil("employee");
+//        tableUtil.getTableData(tableModel);
         // 创建表格对象，并将表格模型对象作为参数传递给它
         table = new JTable(tableModel);
 
