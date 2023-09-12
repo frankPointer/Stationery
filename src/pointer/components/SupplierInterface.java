@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class SupplierInterface extends JPanel {
     private static MyTable table;
-    private static final SupplierUtil supplierUtil = new SupplierUtil("supplier");
+    private static final SupplierUtil SUPPLIER_UTIL = new SupplierUtil("supplier");
     public SupplierInterface() {
         setLayout(new BorderLayout());
 
@@ -103,7 +103,7 @@ public class SupplierInterface extends JPanel {
                 String name = (String) table.getValueAt(row, 1);
                 int result = JOptionPane.showConfirmDialog(null, "<html>确定删除供货商 <b>" + name + "</b> 吗？</html>", "提示", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
-                    supplierUtil.deleteTable(id);
+                    SUPPLIER_UTIL.deleteTable(id);
                     updateTable();
                 }
             }
@@ -123,8 +123,8 @@ public class SupplierInterface extends JPanel {
         JScrollPane scrollPane = new JScrollPane();
         // 创建表格模型对象，并调用方法从数据库中获取数据
         MyTableModel tableModel = new MyTableModel();
-        SupplierUtil supplierUtil = new SupplierUtil("supplier");
-        supplierUtil.getTableData(tableModel);
+
+        SUPPLIER_UTIL.getTableData(tableModel);
 
         // 创建表格对象，并将表格模型对象作为参数传递给它
         table = new MyTable(tableModel);
@@ -156,7 +156,7 @@ public class SupplierInterface extends JPanel {
 
     private static void updateTable() {
         MyTableModel tableModel = new MyTableModel();
-        supplierUtil.getTableData(tableModel);
+        SUPPLIER_UTIL.getTableData(tableModel);
         table.setModel(tableModel);
     }
 }

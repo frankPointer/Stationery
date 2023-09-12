@@ -66,7 +66,7 @@ public class SupplierInsertDialog extends JDialog {
 
         // 组装按钮
         Box bBox = Box.createHorizontalBox();
-        JButton insertButton = new JButton("修改");
+        JButton insertButton = new JButton("添加");
         JButton cancelBtn = new JButton("取消");
         bBox.add(insertButton);
         bBox.add(Box.createHorizontalStrut(120));

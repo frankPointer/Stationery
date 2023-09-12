@@ -1,6 +1,8 @@
 package pointer.frame;
 
+import pointer.components.CategoryInterface;
 import pointer.components.EmpInterface;
+import pointer.components.ProductInterface;
 import pointer.components.SupplierInterface;
 import pointer.constants.FrameConstants;
 import pointer.util.ScreenUtil;
@@ -75,17 +77,17 @@ public class ManagerInterface extends JFrame {
         // 设置左侧工作树
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("系统管理");
         DefaultMutableTreeNode empManage = new DefaultMutableTreeNode("员工管理");
-        DefaultMutableTreeNode customerManage = new DefaultMutableTreeNode("客户管理");
+
         DefaultMutableTreeNode productManage = new DefaultMutableTreeNode("产品");
         DefaultMutableTreeNode categoryManage = new DefaultMutableTreeNode("产品分类");
-        DefaultMutableTreeNode orderManage = new DefaultMutableTreeNode("订单");
+
         DefaultMutableTreeNode supplierManage = new DefaultMutableTreeNode("供货商");
 
         root.add(productManage);
         root.add(categoryManage);
-        root.add(orderManage);
+
         root.add(supplierManage);
-        root.add(customerManage);
+
         root.add(empManage);
 
         // 绑定根节点
@@ -100,6 +102,12 @@ public class ManagerInterface extends JFrame {
                 splitPane.setDividerLocation(200);
             } else if (node.equals(supplierManage)) {
                 splitPane.setRightComponent(new SupplierInterface());
+                splitPane.setDividerLocation(200);
+            } else if (node.equals(categoryManage)) {
+                splitPane.setRightComponent(new CategoryInterface());
+                splitPane.setDividerLocation(200);
+            } else if (node.equals(productManage)) {
+                splitPane.setRightComponent(new ProductInterface());
                 splitPane.setDividerLocation(200);
             }
         });

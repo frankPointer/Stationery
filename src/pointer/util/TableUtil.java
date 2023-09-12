@@ -126,7 +126,7 @@ public abstract class TableUtil {
             for (int i = 0; i < myList.size(); i++) {
                 ps.setString(i + 1, myList.get(i));
             }
-            ps.setInt(5, id);
+            ps.setInt(columnCount, id);
 
             ps.executeUpdate();
 
