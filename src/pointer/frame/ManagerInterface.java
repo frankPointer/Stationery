@@ -111,7 +111,7 @@ public class ManagerInterface extends JFrame {
                 splitPane.setDividerLocation(200);
             }
         });
-        tree.setSelectionRow(1);
+        tree.setSelectionRow(4);
         this.add(splitPane);
     }
 }

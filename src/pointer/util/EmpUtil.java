@@ -30,7 +30,7 @@ public class EmpUtil {
 
     public static int insertTable(String name, String password, String gender, String phone) {
         int empID = 0;
-        String query = "insert into employee (name, password, gender, phone) values (?, ?, ?, ?);\n";
+        String query = "insert into employee (name, password, gender, phone) values (?, ?, ?, ?);";
         try {
             Connection connection = DBUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS); // 得到自增主键

@@ -12,4 +12,8 @@ public class FrameConstants {
     // 管理界面参数
     public static final String MANAGER_NAME = "文具数据管理系统";
     public static final int[] MANAGER_SIZE = {1100, 700};
+
+    // 产品添加界面参数
+    public static final int[] INSERT_PRODUCT_SIZE = {400, 500};
+
 }
