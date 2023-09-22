@@ -35,6 +35,7 @@ ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `catego
 select `category`.`id` AS `编号`, `category`.`CategoryName` AS `类别名称`, `category`.`Description` AS `分类描述`
 from `category`;
 CREATE
+
 ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `employee_view` AS
 select `employee`.`id`       AS `编号`,
        `employee`.`name`     AS `名字`,
@@ -42,6 +43,7 @@ select `employee`.`id`       AS `编号`,
        `employee`.`password` AS `密码`,
        `employee`.`phone`    AS `手机号码`
 from `employee`;
+
 CREATE
 ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `product_view` AS
 select `p`.`id`            AS `商品ID`,
@@ -53,6 +55,7 @@ select `p`.`id`            AS `商品ID`,
        `p`.`Description`   AS `描述`
 from ((`product` `p` join `category` `c` on ((`p`.`CategoryID` = `c`.`id`))) join `supplier` `s`
       on ((`p`.`SupplierID` = `s`.`id`)));
+
 CREATE
 ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `supplier_view` AS
 select `supplier`.`id`            AS `编号`,

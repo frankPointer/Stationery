@@ -80,14 +80,11 @@ public class ManagerInterface extends JFrame {
 
         DefaultMutableTreeNode productManage = new DefaultMutableTreeNode("产品");
         DefaultMutableTreeNode categoryManage = new DefaultMutableTreeNode("产品分类");
-
         DefaultMutableTreeNode supplierManage = new DefaultMutableTreeNode("供货商");
 
         root.add(productManage);
         root.add(categoryManage);
-
         root.add(supplierManage);
-
         root.add(empManage);
 
         // 绑定根节点

@@ -127,7 +127,6 @@ public abstract class TableUtil {
                 ps.setString(i + 1, myList.get(i));
             }
             ps.setInt(columnCount, id);
-
             ps.executeUpdate();
 
         } catch (SQLException e) {
